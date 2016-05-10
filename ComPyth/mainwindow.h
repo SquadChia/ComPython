@@ -29,8 +29,7 @@ public:
 
     std::string n_line;
 
-    bool event(QEvent * event);
-
+    void addLineBlue(std::string n_string);
 
 private slots:
     void on_actionNew_triggered();
@@ -51,7 +50,9 @@ private slots:
 
     void on_actionRedo_triggered();
 
- private:
+    void on_actionShow_Creators_triggered();
+
+private:
     QString mFilename;
 
 };

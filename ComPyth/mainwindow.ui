@@ -55,8 +55,15 @@
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
    </widget>
+   <widget class="QMenu" name="menuCredits">
+    <property name="title">
+     <string>Credits</string>
+    </property>
+    <addaction name="actionShow_Creators"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuCredits"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -110,6 +117,11 @@
   <action name="actionRedo">
    <property name="text">
     <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionShow_Creators">
+   <property name="text">
+    <string>Show Creators</string>
    </property>
   </action>
  </widget>

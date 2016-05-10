@@ -13,7 +13,6 @@ COMPy::COMPy(MainWindow * w)
 void COMPy::nextStep()
 {
         p_w->getLine();
-        p_w->addLine(">>> ");
         qDebug() << "Entered next step";
 
         string user_input = p_w->n_line;
@@ -223,14 +222,14 @@ void COMPy::nextStep()
         iter_database = database.find(user_input);
         if (iter_database != database.end()) //if the user enters the name of a created list.
         {
-            p_w->addLine("[");
+            p_w->addLine("\n[");
             display(iter_database->second);
         }
         else if (user_input == "credits")
         {
             p_w->addLine("\tMade by Ari, Austin, Adam, Jed, and Sergio");
-            p_w->addLine("\n");
         }
+         p_w->addLineBlue("\n>>> ");
 }
 
 COMPy::List*& COMPy::iter_at(List* &node, const int& index)
@@ -272,9 +271,8 @@ void  COMPy::at(List* node, int index) //positive []. example list[7];
     }
     else
     {
-
-        p_w->addLine(node->string_data);
         p_w->addLine("\n");
+        p_w->addLine(node->string_data);
     }
 }
 

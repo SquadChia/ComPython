@@ -10,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
     this->setCentralWidget(ui->textEdit);
-    ui->textEdit->setPlainText("Python 3.5.1 (v3.5.1:37a07cee5969, Dec  6 2015, 01:38:48) [MSC v.1900 32 bit (Intel)] on win32\nType \"copyright\", \"credits\" or \"license()\" for more information. \n>>> ");
+    ui->textEdit->setPlainText("Python 3.5.1 (v3.5.1:37a07cee5969, Dec  6 2015, 01:38:48) [MSC v.1900 32 bit (Intel)] on win32\nType \"copyright\", \"credits\" or \"license()\" for more information. \nPress Enter to start");
+    ui->textEdit->setTextColor(Qt::black);
 
 }
 
@@ -23,36 +24,32 @@ void MainWindow::getLine()
 {
     n_line = ui->textEdit->toPlainText().toStdString();
     size_t index1 = n_line.find_last_of(">>>");
-    size_t index2 = n_line.size()- index1;
+    size_t index2 = n_line.size()- index1-1;
     n_line = n_line.substr(index1+1, index2);
 }
 
 void MainWindow::addLine(std::string n_string)
 {
+    ui->textEdit->setTextColor(Qt::black);
     QString qstr = QString::fromStdString(n_string);
-    ui->textEdit->append(qstr);
-
+    ui->textEdit->insertPlainText(qstr);
 }
 
-bool MainWindow::event(QEvent *event)
+void MainWindow::addLineBlue(std::string n_string)
 {
-    if (event->type() == QEvent::KeyPress)
-        {
-            QKeyEvent *ke = (QKeyEvent *) event;
-            if (ke->key() == Qt::Key_Return || ke->key() == Qt::Key_Enter)
-            {
-                qDebug() << "enter pressed";
-
-            }
-        }
-        return QWidget::event(event);
+    QString qstr = QString::fromStdString(n_string);
+    ui->textEdit->setTextColor(Qt::blue);
+    ui->textEdit->insertPlainText(qstr);
+    ui->textEdit->setTextColor(Qt::black);
 }
 
 
 void MainWindow::on_actionNew_triggered()
 {
     mFilename = "";
-    ui->textEdit->setPlainText("Python 3.5.1 (v3.5.1:37a07cee5969, Dec  6 2015, 01:38:48) [MSC v.1900 32 bit (Intel)] on win32\nType \"copyright\", \"credits\" or \"license()\" for more information. \n >>> ");
+    ui->textEdit->setTextColor(Qt::blue);
+    ui->textEdit->setPlainText("Python 3.5.1 (v3.5.1:37a07cee5969, Dec  6 2015, 01:38:48) [MSC v.1900 32 bit (Intel)] on win32\nType \"copyright\", \"credits\" or \"license()\" for more information. \nPress Enter to start");
+    ui->textEdit->setTextColor(Qt::black);
 }
 
 void MainWindow::on_actionCopy_triggered()
@@ -122,4 +119,11 @@ void MainWindow::on_actionUndo_triggered()
 void MainWindow::on_actionRedo_triggered()
 {
     ui->textEdit->redo();
+}
+
+void MainWindow::on_actionShow_Creators_triggered()
+{
+    addLine("\tMade by Ari, Austin, Adam, Jed, and Sergio");
+    addLineBlue("\n>>> ");
+    ui->textEdit->setTextColor(Qt::black);
 }
